@@ -456,15 +456,11 @@ class BuildCommand extends Command {
             ? await Build.calcSha256(corePaths.first)
             : null;
         Build.buildHelper(target, token!);
-        String args =
-            ' --description $archName --build-dart-define=CORE_SHA256=$token';
-        if (arch == Arch.arm64) {
-          args += ' --build-target-platform windows-arm64';
-        }
         _buildDistributor(
           target: target,
           targets: 'exe,zip',
-          args: args,
+          args:
+              ' --description $archName --build-dart-define=CORE_SHA256=$token',
           env: env,
         );
         return;
